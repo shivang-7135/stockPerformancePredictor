@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AURA QUANT // PREDICTIVE TELEMETRY</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#1c2b3c",
+            "surface-container-highest": "#273647",
+            "on-secondary-fixed": "#001e2c",
+            "on-tertiary-fixed-variant": "#2f2ebe",
+            "surface": "#051424",
+            "on-primary-container": "#00422b",
+            "on-secondary": "#00354a",
+            "on-surface-variant": "#bbcabf",
+            "primary": "#4edea3",
+            "on-background": "#d4e4fa",
+            "surface-dim": "#051424",
+            "on-tertiary-container": "#1d17b2",
+            "surface-tint": "#4edea3",
+            "surface-variant": "#273647",
+            "on-error-container": "#ffdad6",
+            "secondary-fixed": "#c4e7ff",
+            "secondary": "#7bd0ff",
+            "on-primary-fixed-variant": "#005236",
+            "primary-fixed": "#6ffbbe",
+            "on-tertiary-fixed": "#07006c",
+            "primary-container": "#10b981",
+            "outline": "#86948a",
+            "error-container": "#93000a",
+            "tertiary": "#c0c1ff",
+            "on-tertiary": "#1000a9",
+            "on-surface": "#d4e4fa",
+            "tertiary-fixed-dim": "#c0c1ff",
+            "secondary-fixed-dim": "#7bd0ff",
+            "on-secondary-container": "#00374d",
+            "inverse-primary": "#006c49",
+            "background": "#051424",
+            "surface-container": "#122131",
+            "on-primary": "#003824",
+            "inverse-surface": "#d4e4fa",
+            "inverse-on-surface": "#233143",
+            "secondary-container": "#00a6e0",
+            "tertiary-fixed": "#e1e0ff",
+            "surface-container-low": "#0d1c2d",
+            "surface-container-lowest": "#010f1f",
+            "primary-fixed-dim": "#4edea3",
+            "error": "#ffb4ab",
+            "surface-bright": "#2c3a4c",
+            "on-error": "#690005",
+            "tertiary-container": "#9699ff",
+            "outline-variant": "#3c4a42",
+            "on-primary-fixed": "#002113",
+            "on-secondary-fixed-variant": "#004c69"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xl": "1.5rem",
+            "space-md": "0.75rem",
+            "margin": "1rem",
+            "gutter-desktop": "1rem",
+            "space-lg": "1rem",
+            "space-2xl": "2rem",
+            "gutter": "0.75rem",
+            "margin-desktop": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Inter"],
+            "display-lg": ["Inter"],
+            "code-lg": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "code-md": ["JetBrains Mono"],
+            "label-sm": ["JetBrains Mono"],
+            "label-lg": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "code-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "code-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "500" }],
+            "code-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Shared Component JSON) -->
+<header class="docked full-width top-0 bg-surface-container-lowest/85 dark:bg-surface-container-lowest/85 backdrop-blur-md border-b border-outline-variant/40 dark:border-outline-variant/40 flex justify-between items-center w-full px-gutter-desktop h-14 z-50 sticky">
+<!-- Left: Brand Logo + Search + Ticker Quotes -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-headline-md" data-icon="terminal">terminal</span>
+<span class="text-headline-md font-headline-md font-semibold text-on-surface dark:text-on-surface tracking-tight">AURA QUANT // PREDICTIVE TELEMETRY</span>
+</div>
+<!-- Quick Search with Quotes -->
+<div class="hidden xl:flex items-center bg-surface-container-low border border-outline-variant/30 rounded-lg px-space-sm py-1 gap-space-sm focus-within:border-secondary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-body-md" data-icon="search">search</span>
+<input class="bg-transparent text-code-sm font-code-sm text-on-surface placeholder-on-surface-variant/60 focus:outline-none w-48 uppercase" placeholder="TICKER / QUANT MODEL / SHAP..." type="text"/>
+<div class="flex items-center gap-space-xs border-l border-outline-variant/40 pl-space-sm text-code-sm font-code-sm">
+<span class="text-on-surface font-medium">NVDA</span>
+<span class="text-primary font-semibold">+3.2%</span>
+<span class="text-outline-variant/80">|</span>
+<span class="text-on-surface font-medium">AAPL</span>
+<span class="text-error font-semibold">-0.8%</span>
+<span class="text-outline-variant/80">|</span>
+<span class="text-on-surface font-medium">TSLA</span>
+<span class="text-primary font-semibold">+5.4%</span>
+</div>
+</div>
+</div>
+<!-- Center: Navigation Links -->
+<nav class="hidden md:flex items-center gap-space-xl">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface text-label-lg font-label-lg transition-colors" href="#">Workspace</a>
+<a class="text-primary dark:text-primary border-b-2 border-primary dark:border-primary pb-1 font-semibold text-label-lg font-label-lg" href="#">Inference Engine</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface text-label-lg font-label-lg transition-colors" href="#">Model Registry</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface text-label-lg font-label-lg transition-colors" href="#">System Telemetry</a>
+</nav>
+<!-- Right: Trailing Actions, Status, Profile -->
+<div class="flex items-center gap-space-md">
+<!-- Status Pills -->
+<div class="hidden sm:flex items-center gap-space-xs bg-surface-container-high/60 border border-outline-variant/40 rounded-lg px-space-sm py-0.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-primary tracking-wider font-semibold">MARKET OPEN (EST)</span>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs bg-surface-container-high/40 border border-outline-variant/40 rounded-lg px-space-sm py-0.5">
+<span class="text-label-sm font-label-sm text-secondary font-mono">LATENCY: 12ms</span>
+</div>
+<!-- Icon Actions -->
+<div class="flex items-center gap-1 border-l border-outline-variant/30 pl-space-sm">
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-body-lg" data-icon="notifications">notifications</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Terminal Access">
+<span class="material-symbols-outlined text-body-lg" data-icon="terminal">terminal</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Engine Tuning">
+<span class="material-symbols-outlined text-body-lg" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- User Profile Badge -->
+<div class="flex items-center gap-space-sm border-l border-outline-variant/30 pl-space-sm">
+<img class="w-7 h-7 rounded bg-surface-container-highest border border-outline/30 object-cover" data-alt="A portrait of an institutional quantitative research director in a dark high-tech terminal suite, soft teal backlighting on subtle glass and monitors, professional sharp dark aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXfAJfbU1-Jj1bIRwKFTqHLgNNhhhqz32kdsXCXTCOdCRpKxjTOEv-RXvztSYR4WQ9dPtfLuHSMkASsuauKANonKzz8QLhv61uCKKyOa4soXCSecSTP90yLGQFMqYWl6BChggUNgH-ksv5n5Cr944PNIDXkEnTWik6HTlqoc33jkAEuGIOVPO-8k0P_ppUCrxE6G2rberndb1IgD3FQm4efed8c1P10qDDExRYbcH6WNA_SICPC4iMCFe-lKKhdkOWY1nhvzWdHOPy"/>
+<div class="hidden lg:flex flex-col text-left">
+<span class="text-label-sm font-label-sm text-on-surface leading-tight font-semibold">LEAD QUANT // 04</span>
+<span class="text-label-sm font-label-sm text-primary leading-tight font-mono">NODE US-EAST-1</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Layout Frame with SideNavBar and Content Canvas -->
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Shared Component JSON) -->
+<aside class="docked left-0 h-[calc(100vh-3.5rem)] w-64 bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant/30 dark:border-outline-variant/30 flex flex-col justify-between py-space-md shrink-0 hidden lg:flex select-none">
+<!-- Upper Section: Node Health Indicator & Primary Tabs -->
+<div class="flex flex-col gap-space-md">
+<!-- Node Card Header -->
+<div class="px-space-md py-space-xs">
+<div class="bg-surface-container border border-outline-variant/30 p-space-sm rounded-lg flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="memory">memory</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-label-sm font-label-sm text-on-surface font-semibold tracking-wider truncate">CLUSTER NODE US-EAST-1</span>
+<span class="text-label-sm font-label-sm text-secondary font-mono truncate">Active Inferences: 4.2k/s</span>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col px-space-xs gap-0.5">
+<!-- Active Tab: Predictor -->
+<a class="text-primary dark:text-primary bg-surface-container/60 dark:bg-surface-container/60 border-l-2 border-primary dark:border-primary font-medium flex items-center gap-space-md px-space-md py-2 text-label-sm font-label-sm rounded-r transition-colors" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="query_stats" data-weight="fill" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span>Predictor</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150 flex items-center gap-space-md px-space-md py-2 text-label-sm font-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="history_toggle_off">history_toggle_off</span>
+<span>Backtest Matrix</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150 flex items-center gap-space-md px-space-md py-2 text-label-sm font-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="analytics">analytics</span>
+<span>SHAP Attribution</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150 flex items-center gap-space-md px-space-md py-2 text-label-sm font-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="account_tree">account_tree</span>
+<span>Pipeline CI/CD</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150 flex items-center gap-space-md px-space-md py-2 text-label-sm font-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="vital_signs">vital_signs</span>
+<span>Drift Monitor</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150 flex items-center gap-space-md px-space-md py-2 text-label-sm font-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-body-lg" data-icon="terminal">terminal</span>
+<span>Audit Stream</span>
+</a>
+</nav>
+</div>
+<!-- Lower Section: SideNav CTA & Footers -->
+<div class="px-space-md flex flex-col gap-space-md">
+<!-- Retrain Trigger Action -->
+<button class="w-full py-2 bg-primary-container hover:opacity-90 active:scale-[0.99] text-on-primary-container font-headline-md text-label-lg font-semibold rounded-lg flex items-center justify-center gap-space-xs transition-all shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+<span class="material-symbols-outlined text-body-md" data-icon="bolt">bolt</span>
+<span>TRIGGER RETRAIN</span>
+</button>
+<!-- Footer Links -->
+<div class="border-t border-outline-variant/30 pt-space-sm flex flex-col gap-1">
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-space-md px-space-sm py-1.5 text-label-sm font-label-sm rounded hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-body-md" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-space-md px-space-sm py-1.5 text-label-sm font-label-sm rounded hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-body-md" data-icon="menu_book">menu_book</span>
+<span>Documentation</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas (Scrollable) -->
+<main class="flex-1 overflow-y-auto bg-surface-dim px-margin-desktop py-space-md flex flex-col gap-space-lg">
+<!-- 1. Executive Header Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md border-b border-outline-variant/30 pb-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight">EQUITY PREDICTION ENGINE // MULTI-HORIZON ALPHA FORECAST</h1>
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-surface-container-high border border-primary/40 rounded text-label-sm font-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span>Ensemble v4.8.2 Active (TFT + FinBERT + LightGBM)</span>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Real-time Bayesian inference matrix, volatility shock surfaces, and directional high-conviction order flow attribution.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Horizon Switcher -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-0.5 flex items-center text-code-sm font-code-sm">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary font-semibold border border-primary/20">24H Intraday</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">7D Swing</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">30D Position</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">90D Macro</button>
+</div>
+<!-- Actions -->
+<button class="px-3 py-1.5 bg-surface-container-high border border-outline-variant/40 hover:border-secondary text-on-surface rounded-lg text-code-sm font-code-sm font-semibold flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-body-md" data-icon="file_download">file_download</span>
+<span>Export Forecast Report</span>
+</button>
+<button class="px-3 py-1.5 bg-primary text-on-primary font-code-sm font-semibold rounded-lg flex items-center gap-1.5 hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-body-md" data-icon="refresh">refresh</span>
+<span>Trigger Retrain</span>
+</button>
+</div>
+</div>
+<!-- 2. Summary Prediction KPI Cards Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-gutter-desktop">
+<!-- KPI 1: Primary Ticker Forecast -->
+<div class="bg-surface-container/80 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-primary"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">NVDA</span>
+<span class="px-1.5 py-0.2 bg-primary/10 border border-primary/30 rounded text-label-sm font-label-sm text-primary font-semibold">T+1 TARGET</span>
+</div>
+<span class="text-label-sm font-label-sm text-primary font-mono font-bold bg-primary/10 px-2 py-0.5 rounded">84.6% HIGH CONF</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Target Projection</div>
+<div class="text-headline-lg font-headline-lg text-primary font-bold tracking-tight">$142.80</div>
+</div>
+<div class="text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">Spot $132.84</div>
+<div class="text-code-md font-code-md text-primary font-semibold">+7.50% Median Delta</div>
+</div>
+</div>
+<div class="pt-space-xs border-t border-outline-variant/30 flex items-center justify-between text-code-sm font-code-sm text-on-surface-variant">
+<span>Bayesian CI (95%)</span>
+<span class="font-mono text-on-surface font-medium">[$138.20 — $147.50]</span>
+</div>
+</div>
+<!-- KPI 2: Model Volatility & VaR Metric Card -->
+<div class="bg-surface-container/80 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden group hover:border-secondary/50 transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-secondary"></div>
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">VOLATILITY &amp; VALUE-AT-RISK</span>
+<span class="text-label-sm font-label-sm text-secondary font-mono font-semibold bg-secondary/10 px-2 py-0.5 rounded">REGIME NOMINAL</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Forecast HV30</div>
+<div class="text-headline-lg font-headline-lg text-secondary font-bold tracking-tight">24.2%</div>
+</div>
+<div class="text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">99% Daily VaR</div>
+<div class="text-code-md font-code-md text-error font-semibold">-2.85% Tail</div>
+</div>
+</div>
+<div class="pt-space-xs border-t border-outline-variant/30 flex items-center justify-between text-code-sm font-code-sm text-on-surface-variant">
+<span>Current Shock Mode</span>
+<span class="font-mono text-primary font-medium">Low Vol / Bull Drift</span>
+</div>
+</div>
+<!-- KPI 3: Historical Backtest Hit-Rate Card -->
+<div class="bg-surface-container/80 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-primary"></div>
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">OOS HIT-RATE MATRIX</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-mono">180 INFERENCES</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Directional Accuracy</div>
+<div class="text-headline-lg font-headline-lg text-on-surface font-bold tracking-tight">78.4%</div>
+</div>
+<div class="text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">Sharpe Ratio</div>
+<div class="text-code-md font-code-md text-primary font-semibold">2.41 OOS</div>
+</div>
+</div>
+<div class="pt-space-xs border-t border-outline-variant/30 flex items-center justify-between text-code-sm font-code-sm text-on-surface-variant">
+<span>Max In-Sample Drawdown</span>
+<span class="font-mono text-error font-medium">-6.2% Peak-to-Trough</span>
+</div>
+</div>
+<!-- KPI 4: Primary Alpha Drivers Card -->
+<div class="bg-surface-container/80 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden group hover:border-tertiary/50 transition-colors">
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-tertiary"></div>
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">TOP SHAP ATTRIBUTION</span>
+<span class="text-label-sm font-label-sm text-tertiary font-mono bg-tertiary/10 px-2 py-0.5 rounded">N=42 FACTORS</span>
+</div>
+<div class="my-space-xs flex flex-col gap-1">
+<div class="flex items-center justify-between text-code-sm font-code-sm">
+<span class="text-on-surface-variant">L2 Orderbook Skew</span>
+<span class="text-primary font-semibold">+4.1% Impact</span>
+</div>
+<div class="flex items-center justify-between text-code-sm font-code-sm">
+<span class="text-on-surface-variant">Earnings NLP Sentiment</span>
+<span class="text-primary font-semibold">+2.8% Impact</span>
+</div>
+<div class="flex items-center justify-between text-code-sm font-code-sm">
+<span class="text-on-surface-variant">2Y Macro Yield Differential</span>
+<span class="text-error font-semibold">-1.2% Impact</span>
+</div>
+</div>
+<div class="pt-space-xs border-t border-outline-variant/30 flex items-center justify-between text-code-sm font-code-sm text-on-surface-variant">
+<span>Residual Noise Factor</span>
+<span class="font-mono text-on-surface font-medium">0.82% Unmodeled</span>
+</div>
+</div>
+</div>
+<!-- 3. Centerpiece Forecasting & Price Trajectory Chart Card -->
+<div class="bg-surface-container/90 backdrop-blur-md border border-outline-variant/40 rounded-xl p-space-lg flex flex-col gap-space-md relative">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="text-headline-md font-headline-md font-semibold text-on-surface">NVDA // MULTI-PERCENTILE DIVERGENCE CONE</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-code-sm font-code-sm text-on-surface-variant border border-outline-variant/30">1M CANDLES</span>
+</div>
+<div class="hidden sm:flex items-center gap-space-sm text-label-sm font-label-sm">
+<div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-primary"></span><span class="text-on-surface-variant">Median Forecast (+7.5%)</span></div>
+<div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-secondary"></span><span class="text-on-surface-variant">95th Percentile (+11.4%)</span></div>
+<div class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-error"></span><span class="text-on-surface-variant">5th Percentile (-2.3%)</span></div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-code-sm font-code-sm">
+<span class="text-on-surface-variant font-mono">T_0: <strong class="text-on-surface">$132.84</strong></span>
+<span class="text-outline-variant/60">|</span>
+<span class="text-on-surface-variant font-mono">T+24H: <strong class="text-primary">$142.80</strong></span>
+<span class="text-outline-variant/60">|</span>
+<span class="text-on-surface-variant font-mono">CONF: <strong class="text-secondary">84.6%</strong></span>
+</div>
+</div>
+<!-- High Precision SVG Canvas Chart Area -->
+<div class="w-full h-80 bg-surface-container-lowest/90 rounded border border-outline-variant/30 relative overflow-hidden p-2 flex flex-col justify-between">
+<!-- Chart Header Metrics Overlay -->
+<div class="absolute top-3 left-4 z-10 flex items-center gap-space-md pointer-events-none text-code-sm font-code-sm">
+<div class="bg-surface-container-high/80 px-2 py-1 rounded border border-outline-variant/40">
+<span class="text-on-surface-variant">O: </span><span class="text-on-surface">132.10</span>
+<span class="text-on-surface-variant ml-2">H: </span><span class="text-on-surface">133.40</span>
+<span class="text-on-surface-variant ml-2">L: </span><span class="text-on-surface">131.80</span>
+<span class="text-on-surface-variant ml-2">C: </span><span class="text-primary">132.84</span>
+</div>
+<div class="hidden sm:block text-label-sm font-label-sm text-secondary bg-surface-container/60 px-2 py-1 rounded border border-secondary/30">
+              GAUSSIAN PROCESS CONE: ±$4.65 DISPERSION
+            </div>
+</div>
+<!-- The Vector Forecast Surface -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 320">
+<defs>
+<!-- Gradient for Bullish / Median Cones -->
+<lineargradient id="forecastConeGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#4edea3" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#7bd0ff" stop-opacity="0.08"></stop>
+</lineargradient>
+<lineargradient id="bearConeGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#ef4444" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#ffb4ab" stop-opacity="0.02"></stop>
+</lineargradient>
+<pattern height="40" id="chartGrid" patternunits="userSpaceOnUse" width="50">
+<path d="M 50 0 L 0 0 0 40" fill="none" stroke="#1c2b3c" stroke-dasharray="2,2" stroke-width="0.75"></path>
+</pattern>
+</defs>
+<!-- Background Grid -->
+<rect fill="url(#chartGrid)" height="320" width="1000"></rect>
+<!-- Price Horizontal Guides -->
+<line stroke="#273647" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<text fill="#86948a" font-family="JetBrains Mono" font-size="10" x="960" y="46">$150.00</text>
+<line stroke="#273647" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="120" y2="120"></line>
+<text fill="#86948a" font-family="JetBrains Mono" font-size="10" x="960" y="116">$142.80 (Tgt)</text>
+<line stroke="#273647" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="190" y2="190"></line>
+<text fill="#86948a" font-family="JetBrains Mono" font-size="10" x="960" y="186">$132.84 (Spot)</text>
+<line stroke="#273647" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="260" y2="260"></line>
+<text fill="#86948a" font-family="JetBrains Mono" font-size="10" x="960" y="256">$125.00</text>
+<!-- Historical Price Path (0 to 550 x-axis) -->
+<path d="M 20,220 L 60,215 L 100,230 L 140,210 L 180,195 L 220,205 L 260,185 L 300,190 L 340,175 L 380,182 L 420,165 L 460,178 L 500,192 L 550,190" fill="none" stroke="#bbcabf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<!-- Historical Area Gradient Fill Below Path -->
+<path d="M 20,220 L 60,215 L 100,230 L 140,210 L 180,195 L 220,205 L 260,185 L 300,190 L 340,175 L 380,182 L 420,165 L 460,178 L 500,192 L 550,190 L 550,280 L 20,280 Z" fill="#bbcabf" fill-opacity="0.04"></path>
+<!-- Vertical Divider: T_0 Origin Marker -->
+<line stroke="#7bd0ff" stroke-dasharray="3,3" stroke-width="1.5" x1="550" x2="550" y1="10" y2="280"></line>
+<circle cx="550" cy="190" fill="#051424" r="5" stroke="#4edea3" stroke-width="3"></circle>
+<text fill="#7bd0ff" font-family="JetBrains Mono" font-size="11" font-weight="600" x="556" y="25">T_0 EXECUTION SPOT</text>
+<!-- Divergence Cones (from 550 to 950) -->
+<!-- 95th Percentile Bullish Surface (Upper Cone) -->
+<polygon fill="url(#forecastConeGrad)" points="550,190 950,55 950,118 550,190"></polygon>
+<!-- Bearish Tail 5th Percentile Cone (Lower Cone) -->
+<polygon fill="url(#bearConeGrad)" points="550,190 950,122 950,240 550,190"></polygon>
+<!-- 95th Percentile Trajectory Line (Upper Bound) -->
+<path d="M 550,190 Q 720,130 950,55" fill="none" stroke="#7bd0ff" stroke-dasharray="5,3" stroke-width="2"></path>
+<circle cx="950" cy="55" fill="#7bd0ff" r="4"></circle>
+<text fill="#7bd0ff" font-family="JetBrains Mono" font-size="11" font-weight="600" x="830" y="50">Bull 95th (+11.4%)</text>
+<!-- Median Projected Trajectory Line (Primary Target) -->
+<path d="M 550,190 Q 720,160 950,118" fill="none" stroke="#4edea3" stroke-width="3"></path>
+<circle cx="950" cy="118" fill="#4edea3" r="5"></circle>
+<text fill="#4edea3" font-family="JetBrains Mono" font-size="12" font-weight="bold" x="830" y="112">Median +7.5% ($142.80)</text>
+<!-- 5th Percentile Tail Line (Lower Bound) -->
+<path d="M 550,190 Q 720,210 950,240" fill="none" stroke="#ffb4ab" stroke-dasharray="4,4" stroke-width="1.5"></path>
+<circle cx="950" cy="240" fill="#ffb4ab" r="4"></circle>
+<text fill="#ffb4ab" font-family="JetBrains Mono" font-size="11" font-weight="600" x="830" y="235">Bear 5th (-2.3%)</text>
+<!-- Volume Profile Histogram at bottom (0-1000) -->
+<g fill="#1c2b3c" opacity="0.65">
+<rect height="20" width="12" x="30" y="260"></rect>
+<rect height="30" width="12" x="70" y="250"></rect>
+<rect height="40" width="12" x="110" y="240"></rect>
+<rect height="25" width="12" x="150" y="255"></rect>
+<rect height="35" width="12" x="190" y="245"></rect>
+<rect height="45" width="12" x="230" y="235"></rect>
+<rect height="30" width="12" x="270" y="250"></rect>
+<rect height="38" width="12" x="310" y="242"></rect>
+<rect height="50" width="12" x="350" y="230"></rect>
+<rect height="42" width="12" x="390" y="238"></rect>
+<rect height="55" width="12" x="430" y="225"></rect>
+<rect height="45" width="12" x="470" y="235"></rect>
+<rect fill="#4edea3" height="60" opacity="0.4" width="12" x="510" y="220"></rect>
+<rect fill="#4edea3" height="65" opacity="0.7" width="12" x="550" y="215"></rect>
+<rect fill="#4edea3" height="50" opacity="0.5" width="12" x="590" y="230"></rect>
+<rect fill="#4edea3" height="40" opacity="0.3" width="12" x="630" y="240"></rect>
+<rect fill="#4edea3" height="30" opacity="0.3" width="12" x="670" y="250"></rect>
+<rect fill="#4edea3" height="25" opacity="0.2" width="12" x="710" y="255"></rect>
+<rect fill="#4edea3" height="20" opacity="0.2" width="12" x="750" y="260"></rect>
+<rect fill="#4edea3" height="18" opacity="0.2" width="12" x="790" y="262"></rect>
+<rect fill="#4edea3" height="15" opacity="0.2" width="12" x="830" y="265"></rect>
+<rect fill="#4edea3" height="15" opacity="0.2" width="12" x="870" y="265"></rect>
+<rect fill="#4edea3" height="12" opacity="0.2" width="12" x="910" y="268"></rect>
+</g>
+</svg>
+<!-- Time Axis Markers -->
+<div class="flex justify-between items-center px-4 pt-1 border-t border-outline-variant/30 text-code-sm font-code-sm text-outline">
+<span>09:30 EST</span>
+<span>11:00 EST</span>
+<span>13:00 EST</span>
+<span>14:30 EST</span>
+<span class="text-primary font-semibold">16:00 T_0 (NOW)</span>
+<span class="text-secondary font-mono">+4H FORECAST</span>
+<span class="text-secondary font-mono">+12H FORECAST</span>
+<span class="text-secondary font-mono">+24H TARGET CLOSE</span>
+</div>
+</div>
+</div>
+<!-- 4. Two-Column Analytical Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop">
+<!-- Left Column: Multi-Factor Feature Attribution & Weight Allocation (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="bg-surface-container/90 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-body-lg" data-icon="account_tree">account_tree</span>
+<h3 class="text-headline-md font-headline-md font-semibold text-on-surface">SHAP Factor Attribution</h3>
+</div>
+<span class="text-code-sm font-code-sm text-on-surface-variant font-mono">Z-SCORE NORMALIZED</span>
+</div>
+<!-- Factor 1: L2 Microstructure -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-code-sm font-code-sm">
+<span class="text-on-surface font-medium">L2 Orderbook Skew (Bid/Ask 3-Tier)</span>
+<span class="text-primary font-mono font-semibold">+2.84 σ</span>
+</div>
+<div class="w-full bg-surface-container-high rounded h-2 overflow-hidden flex">
+<div class="bg-primary h-full rounded" style="width: 78%;"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Model Contribution: 34.2%</span>
+<span class="text-primary font-mono">Direction: BULLISH</span>
+</div>
+</div>
+<!-- Factor 2: FinBERT Sentiment -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-code-sm font-code-sm">
+<span class="text-on-surface font-medium">FinBERT Institutional Flow &amp; News</span>
+<span class="text-primary font-mono font-semibold">+1.92 σ</span>
+</div>
+<div class="w-full bg-surface-container-high rounded h-2 overflow-hidden flex">
+<div class="bg-secondary h-full rounded" style="width: 58%;"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>NLP Score: 0.84 Positive</span>
+<span class="text-secondary font-mono">CONF: 91.2%</span>
+</div>
+</div>
+<!-- Factor 3: Implied Vol Surface Shift -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-code-sm font-code-sm">
+<span class="text-on-surface font-medium">Implied Vol Surface Skew Delta</span>
+<span class="text-on-surface-variant font-mono">+0.48 σ</span>
+</div>
+<div class="w-full bg-surface-container-high rounded h-2 overflow-hidden flex">
+<div class="bg-tertiary h-full rounded" style="width: 24%;"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Delta Neutral Drift</span>
+<span class="text-on-surface-variant font-mono">NEUTRAL</span>
+</div>
+</div>
+<!-- Factor 4: Macro Rates / SOFR Correlation -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-code-sm font-code-sm">
+<span class="text-on-surface font-medium">2Y/10Y Yield Curve Inversion Sensitivity</span>
+<span class="text-error font-mono font-semibold">-1.14 σ</span>
+</div>
+<div class="w-full bg-surface-container-high rounded h-2 overflow-hidden flex">
+<div class="bg-error h-full rounded" style="width: 38%;"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Headwind Factor</span>
+<span class="text-error font-mono">Direction: BEARISH</span>
+</div>
+</div>
+<!-- NLP Sentiment Detailed Gauge Box -->
+<div class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center text-primary font-bold font-code-lg text-code-md">
+                  +0.84
+                </div>
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">FINBERT AGGREGATE EMBEDDING</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Sampled 1,420 transcripts, SEC 8-Ks &amp; tweets</span>
+</div>
+</div>
+<span class="px-2 py-1 bg-primary/10 border border-primary/30 rounded text-label-sm font-label-sm text-primary font-mono font-bold">
+                STRONG CONVICTION
+              </span>
+</div>
+</div>
+<!-- Micro Strategy Allocation Summary -->
+<div class="bg-surface-container/90 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">RECOMMENDED POSITION SCALE</span>
+<span class="text-headline-md font-headline-md font-bold text-primary">1.45x Kelly Leverage</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2.5 py-1 rounded bg-surface-container-high border border-outline-variant/40 text-code-sm font-code-sm text-on-surface">Target Size: $14.2M</span>
+<span class="px-2.5 py-1 rounded bg-primary-container text-on-primary-container text-code-sm font-code-sm font-bold">EXECUTE SPREAD</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Model Inference Feed & Validation Stream (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container/90 backdrop-blur-md border border-outline-variant/30 rounded-xl p-space-md flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between border-b border-outline-variant/30 pb-space-sm gap-2">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-body-lg" data-icon="table_chart">table_chart</span>
+<h3 class="text-headline-md font-headline-md font-semibold text-on-surface">Live Model Inference Feed &amp; Validation</h3>
+</div>
+<div class="flex items-center gap-space-xs text-code-sm font-code-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-on-surface-variant font-mono">STREAMING INFERENCE (0.2s)</span>
+</div>
+</div>
+<!-- High-Density Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/40 text-label-sm font-label-sm text-on-surface-variant">
+<th class="py-2 px-space-sm font-semibold uppercase">TICKER</th>
+<th class="py-2 px-space-sm font-semibold uppercase text-right">SPOT</th>
+<th class="py-2 px-space-sm font-semibold uppercase text-right">TARGET (T+1)</th>
+<th class="py-2 px-space-sm font-semibold uppercase text-right">DELTA</th>
+<th class="py-2 px-space-sm font-semibold uppercase text-right">CONF</th>
+<th class="py-2 px-space-sm font-semibold uppercase text-right">REALIZED</th>
+<th class="py-2 px-space-sm font-semibold uppercase text-center">DRIFT STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 text-code-sm font-code-sm">
+<!-- Row 1: NVDA -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2 px-space-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    NVDA
+                  </td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface">$132.84</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-semibold">$142.80</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-bold">+7.50%</td>
+<td class="py-2 px-space-sm text-right font-mono text-secondary">84.6%</td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface-variant">$132.84</td>
+<td class="py-2 px-space-sm text-center">
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary/10 border border-primary/30 text-primary font-semibold">NOMINAL</span>
+</td>
+</tr>
+<!-- Row 2: AAPL -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2 px-space-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    AAPL
+                  </td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface">$228.40</td>
+<td class="py-2 px-space-sm text-right font-mono text-error font-semibold">$224.50</td>
+<td class="py-2 px-space-sm text-right font-mono text-error font-bold">-1.71%</td>
+<td class="py-2 px-space-sm text-right font-mono text-secondary">79.2%</td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface-variant">$227.10</td>
+<td class="py-2 px-space-sm text-center">
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary/10 border border-primary/30 text-primary font-semibold">NOMINAL</span>
+</td>
+</tr>
+<!-- Row 3: TSLA -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2 px-space-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    TSLA
+                  </td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface">$258.90</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-semibold">$274.00</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-bold">+5.83%</td>
+<td class="py-2 px-space-sm text-right font-mono text-secondary">88.1%</td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface-variant">$261.20</td>
+<td class="py-2 px-space-sm text-center">
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary/10 border border-primary/30 text-primary font-semibold">NOMINAL</span>
+</td>
+</tr>
+<!-- Row 4: MSFT -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2 px-space-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    MSFT
+                  </td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface">$448.20</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-semibold">$454.10</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-bold">+1.32%</td>
+<td class="py-2 px-space-sm text-right font-mono text-secondary">72.4%</td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface-variant">$449.00</td>
+<td class="py-2 px-space-sm text-center">
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-semibold">CHECKING</span>
+</td>
+</tr>
+<!-- Row 5: AMZN -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2 px-space-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    AMZN
+                  </td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface">$186.50</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-semibold">$192.40</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-bold">+3.16%</td>
+<td class="py-2 px-space-sm text-right font-mono text-secondary">81.0%</td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface-variant">$187.30</td>
+<td class="py-2 px-space-sm text-center">
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary/10 border border-primary/30 text-primary font-semibold">NOMINAL</span>
+</td>
+</tr>
+<!-- Row 6: META -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-2 px-space-sm font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    META
+                  </td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface">$504.10</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-semibold">$518.00</td>
+<td class="py-2 px-space-sm text-right font-mono text-primary font-bold">+2.76%</td>
+<td class="py-2 px-space-sm text-right font-mono text-secondary">76.8%</td>
+<td class="py-2 px-space-sm text-right font-mono text-on-surface-variant">$505.40</td>
+<td class="py-2 px-space-sm text-center">
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary/10 border border-primary/30 text-primary font-semibold">NOMINAL</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bottom Micro Controls for Validation Stream -->
+<div class="flex items-center justify-between pt-space-xs border-t border-outline-variant/30 text-label-sm font-label-sm text-on-surface-variant">
+<span>Showing top 6 institutional large-cap allocations</span>
+<div class="flex items-center gap-space-sm">
+<button class="hover:text-primary transition-colors">Pause Tick Ingestion</button>
+<span>•</span>
+<button class="hover:text-primary transition-colors">Re-calculate Covariance</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. Bottom Telemetry & MLOps Bar -->
+<footer class="bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-space-sm flex flex-wrap items-center justify-between text-code-sm font-code-sm text-on-surface-variant gap-space-md">
+<!-- Left: Node Status Cluster -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface font-semibold">NODE US-EAST-1A</span>
+<span class="text-outline-variant/80">|</span>
+<span class="text-secondary font-mono">TENSORRT-LLM PIPELINE READY</span>
+</div>
+<div class="hidden md:flex items-center gap-space-xs">
+<span class="text-on-surface-variant">Throughput:</span>
+<span class="text-primary font-mono font-semibold">4.2k inf/sec</span>
+</div>
+</div>
+<!-- Center: Kolmogorov-Smirnov & MLOps Health -->
+<div class="flex items-center gap-space-lg font-mono text-code-sm">
+<div class="flex items-center gap-1">
+<span class="text-on-surface-variant">KS DRIFT:</span>
+<span class="text-primary font-semibold">0.02 (Nominal)</span>
+</div>
+<div class="hidden sm:flex items-center gap-1">
+<span class="text-on-surface-variant">CACHE HIT:</span>
+<span class="text-secondary font-semibold">99.4%</span>
+</div>
+<div class="hidden sm:flex items-center gap-1">
+<span class="text-on-surface-variant">P99 LATENCY:</span>
+<span class="text-on-surface font-semibold">14.1ms</span>
+</div>
+</div>
+<!-- Right: Time & Engine Signoff -->
+<div class="flex items-center gap-space-sm">
+<span class="text-label-sm font-label-sm text-outline font-mono">HASH: 0x9f4a...88c2</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant/40 text-label-sm font-label-sm text-primary font-mono">
+            SECURE SANDBOX
+          </span>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
