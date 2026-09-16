@@ -338,5 +338,39 @@
     "pct_change": null,
     "correct": null,
     "phase": "live"
+  },
+  {
+    "date": "2026-09-16",
+    "company": "ASML Holding",
+    "ticker": "ASML",
+    "sentiment": "Error",
+    "prediction": "Unknown",
+    "confidence": 0,
+    "reasoning": "Failed to analyze. Error: Connection error.",
+    "lesson_applied": "N/A",
+    "news": "Error fetching news for ASML Holding: HTTPSConnectionPool(host='google.serper.dev', port=443): Max retries exceeded with url: /news (Caused by NameResolutionError(\"HTTPSConnection(host='google.serper.dev', port=443): Failed to resolve 'google.serper.dev' ([Errno 8] nodename nor servname provided, or not known)\"))",
+    "open_price": null,
+    "close_price": null,
+    "actual_trend": null,
+    "pct_change": null,
+    "correct": null,
+    "phase": "live"
+  },
+  {
+    "date": "2026-09-16",
+    "company": "ASML Holding",
+    "ticker": "ASML",
+    "sentiment": "Bearish",
+    "prediction": "Down",
+    "confidence": 68,
+    "reasoning": "Recent headlines over the past 24 hours highlight significant downward momentum, with shares tumbling 7% following calls by leading AI executives to slow advanced AI development and amid growing fears of an AI capex slowdown. Despite positive analyst commentary, the immediate negative sentiment regarding semiconductor tool demand and stretched valuations continues to exert heavy selling pressure.",
+    "lesson_applied": "Heavy thematic de-risking around broader AI slowdown fears typically carries multi-session downside momentum, overpowering isolated bullish analyst upgrades or dip-buying arguments in the short term.",
+    "news": "1. [2 weeks ago] Why ASML Holding Stock Bumped 4% Higher Today - Friday was a fine day to hold the stock of ASML Holding (NASDAQ: ASML), the Netherlands-based company that specializes in photolithography (essentially,...\n2. [1 month ago] ASML Stock Takes A Break After Rebounding - Dutch semiconductor equipment maker ASML Holding (ASML) is retreating in a drop among chip stocks Wednesday, heading for a second straight decline after a...\n3. [1 day ago] Why ASML Stock Is Falling Today - ASML Holding (ASML +1.04%) stock fell on Monday after leading AI executives from around the industry called for slowing the development of its most advanced...\n4. [1 day ago] ASML Stock Gains Over 5% — Why Bernstein Thinks ASML Holding Can Keep Climbing After Nearly 140% Run In The Past Year - Shares of ASML Holding NV (ASML) surged nearly 5.5% on Monday after Bernstein significantly raised its price target on the semiconductor equipment maker.\n5. [2 weeks ago] How ASML Can Hit $1 Trillion Value and Why the China Threat Is Overblown - ASML Holding stock has been in a funk ever since it was reported China had made significant progress on emulating the Dutch company's chipmaking tools.\n6. [4 days ago] ASML (NasdaqGS:ASML) Stock Trades At A Premium After High NA EUV News - ASML Holding has delivered very strong returns over the past few years, yet current valuation checks suggest the stock is priced at a premium rather than...\n7. [20 hours ago] ASML’s Current Share Price of $1,575 Shouldn’t Scare You. - ASML just shed over 14% in a month, and while the bears are pointing at stretched valuations and geopolitical exposure, the bulls see something the selloff...\n8. [3 weeks ago] Here's Why ASML (ASML) Fell More Than Broader Market - In the latest close session, ASML (ASML) was down 2.24% at $1,696.16. The stock's change was less than the S&P 500's daily loss of 0.25%.\n9. [21 hours ago] ASML Stock Fell 7% in a Day on AI Slowdown Fears. Here’s Where the Stock Could Go - One AI CEO's September 1",
+    "open_price": null,
+    "close_price": null,
+    "actual_trend": null,
+    "pct_change": null,
+    "correct": null,
+    "phase": "live"
   }
 ]
